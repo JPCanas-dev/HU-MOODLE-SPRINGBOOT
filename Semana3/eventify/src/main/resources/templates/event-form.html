@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Evento - Eventify</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="datetime-local"] { width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        .btn { padding: 10px 15px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .btn:hover { background-color: #218838; }
+        .back-link { display: inline-block; margin-top: 15px; color: #007bff; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<h1>Registrar Nuevo Evento</h1>
+
+<!-- ESCENARIO 3: Formulario conectado al backend mediante Thymeleaf -->
+<!-- th:action define la ruta POST a la que se enviarán los datos -->
+<!-- th:object vincula este formulario al objeto 'event' vacío enviado por el controlador -->
+<form th:action="@{/admin/events/new}" th:object="${event}" method="post">
+
+    <!-- Campo para el Nombre del Evento -->
+    <div class="form-group">
+        <label for="name">Nombre del Evento:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+    </div>
+
+    <!-- Campo para la Descripción del Evento -->
+    <div class="form-group">
+        <label for="description">Descripción:</label>
+        <input type="text" id="description" th:field="*{description}" required />
+    </div>
+
+    <!-- Campo para el Lugar (Venue) del Evento -->
+    <div class="form-group">
+        <label for="venue">Lugar (Venue):</label>
+        <input type="text" id="venue" th:field="*{venue}" required />
+    </div>
+
+    <!-- Campo para la Fecha y Hora (LocalDateTime) -->
+    <div class="form-group">
+        <label for="date">Fecha y Hora:</label>
+        <input type="datetime-local" id="date" th:field="*{date}" required />
+    </div>
+
+    <!-- Botón de envío que activa la acción POST y la redirección -->
+    <button type="submit" class="btn">Guardar Evento</button>
+</form>
+
+<!-- Enlace de navegación para regresar al listado principal -->
+<a th:href="@{/admin/events}" class="back-link">← Volver al listado</a>
+
+</body>
+</html>
